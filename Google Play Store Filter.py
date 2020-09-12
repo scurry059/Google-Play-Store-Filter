@@ -4,7 +4,7 @@
 # Demonstrates the use of Lists is Python with 2018 Google Play Store Data
 # Data Source URL: https://www.kaggle.com/lava18/google-play-store-apps
 
-# Initial Ideas: create a list of objects where each entry in the list is an app
+# Initial Ideas: create a list of objects where each entry in the list is an app object
 # Each app will have attributes that correspond to column titles
 # The user needs to be able to filter on up to three of these attributes
 # Need to confirm if user should be able to apply multiple filters (ex: category type and content rating)
