@@ -11,4 +11,4 @@
 # User inputs their criteria and the program needs to find all records that match
 # Minimum Requirements: Be able to run the program once and return result, user may have to rerun for additional queries
 # Ideal Requirements: Be able to have program run in a loop and filter on multiple criteria
-# Shoot for the Stars Requirements: Python GUI with program logic
+# Shoot for the Stars Requirements: GUI with program logic
