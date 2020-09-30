@@ -69,3 +69,37 @@ with open('googleplaystore.csv') as csvFile:
 # Ask user how many search values they will enter (up to three allowed)
 # Have a switch statement depending on which columns user would like to search by
 # Have the switch run in a loop with an exit command
+
+# First, prompt and ask user how many key values they will search for
+
+print("Welcome to the Google Play Store Filter!")
+print("This program allows you to select up to three search terms to find matching Google Apps")
+print("Note: You will be prompted to select how many fields you'd like to search by first.")
+print("Then, you will be prompted for your search term. Enter the term, followed by enter with no unnecessary white "
+      "spaces.")
+
+exitCondition = False  # exit condition to terminate menu loop
+while not exitCondition:
+    numberOfSearchTerms = int(input("Would you like to use 1, 2, or 3 search terms? Please type the number and press "
+                                    "enter. Enter 4 to exit the program."))
+    if numberOfSearchTerms == 1:
+        # offer all columns and let user pick one to search on
+        # then search the entire list at that columns index and return all that match
+        # display columns function
+        input1 = input("Which column above would you like to search on?")
+        # searchOneTerm function
+    elif numberOfSearchTerms == 2:
+        # display columns function
+        input1 = input("Select the first column you would like to search on: ")
+        input2 = input("Select the second column you would like to search on: ")
+        # searchTwoTerms(input1, input2)function
+    elif numberOfSearchTerms == 3:
+        # display columns function
+        input1 = input("Select the first column you would like to search on: ")
+        input2 = input("Select the second column you would like to search on: ")
+        input3 = input("Select the third column you would like to search on: ")
+        # searchThreeTerms(input1, input2, input3) function
+    elif numberOfSearchTerms == 4:
+        exitCondition = True
+
+
