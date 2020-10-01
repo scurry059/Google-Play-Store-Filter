@@ -4,15 +4,20 @@
 # Demonstrates the use of Lists is Python with 2018 Google Play Store Data
 # Data Source URL: https://www.kaggle.com/lava18/google-play-store-apps
 
+# Initial Ideas: create a list of objects where each entry in the list is an app object
+# Each app will have attributes that correspond to column titles
+# The user needs to be able to filter on up to three of these attributes
+# Need to confirm if user should be able to apply multiple filters (ex: category type and content rating)
 # User inputs their criteria and the program needs to find all records that match
+# Minimum Requirements: Be able to run the program once and return result, user may have to rerun for additional queries
+# Ideal Requirements: Be able to have program run in a loop and filter on multiple criteria
+# Shoot for the Stars Requirements: GUI with program logic
 
 import csv
 
-<<<<<<< HEAD
-=======
 
 # Class to represent an app object and all its properties (columns) from the data source
-
+# Class approach was abandoned, it complicated processing unnecessarily
 
 class GoogleApp:
     def __init__(self, app, category, rating, reviews, size, installs, type, price, contentRating, genres, lastUpdated,
@@ -39,9 +44,10 @@ class GoogleApp:
         appString = appString + " " + self.lastUpdated + " " + self.currentVer + " " + self.androidVer
         return appString
 
->>>>>>> parent of 8a95aa2... Scrap Object Approach
+
 # Our list object which will hold the entire data source for processing
-appList = []
+appList = []  # this was abandoned, but it was cool to make an entire list of objects
+appList2 = []
 
 # Use a reader object to read from csv file data source
 with open('googleplaystore.csv') as csvFile:
@@ -50,11 +56,12 @@ with open('googleplaystore.csv') as csvFile:
     for row in readCSV:
         # Note: needed to edit data source as one row had two columns that were null and reader object threw errors
         # For each row in the file, make an object and append it to the list of items
-<<<<<<< HEAD
+        appList.append(
+            GoogleApp(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11],
+                      row[12]))
         listFormOfApp = [row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10],
                          row[11], row[12]]
-        print(listFormOfApp)
-        appList.append(listFormOfApp)
+        appList2.append(listFormOfApp)
 
 
 # Display function that only serves to format menu selection
@@ -64,26 +71,17 @@ def displayColumns():
           "Updated Date \n")
     print("12. Current Version (Only checks major versions, not minor) \t 13. Android Version (minimum Android OS "
           "required, also only checks major version \n")
-=======
-        appList.append(
-            GoogleApp(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11],
-                      row[12]))
-        # The first object in the list is the column headings, and could be ignored
-        # just used for debugging print(appList[0])
->>>>>>> parent of 8a95aa2... Scrap Object Approach
 
-        # just used for debugging i = i + 1
 
-<<<<<<< HEAD
-def searchOneTerm(columnInput1, searchList, searchedTerm1):  # the input1 here is the column to search
+def searchOneTerm(input1, searchList, searchTerm1):  # the input1 here is the column to search
     length = len(searchList)
-    index1 = 0
+    i = 0
     totalMatchingRows = 0
-    while index1 < length:  # go through the entire list; remember that users input will be 1 higher
-        checkApp = appList[i]
-        print(checkApp[input1])
+    while i < length:  # go through the entire list; remember that users input will be 1 higher
+        checkApp = appList2[i]
+        # print(checkApp[input1])
         # print(type(checkApp[input1]))
-        if searchedTerm1 in checkApp[columnInput1 - 1]:
+        if searchTerm1 in checkApp[input1 - 1]:
             print(checkApp)
             totalMatchingRows = totalMatchingRows + 1
         # input 1 is the column, or row[input1] from when the objects were made but now they correspond to
@@ -91,53 +89,12 @@ def searchOneTerm(columnInput1, searchList, searchedTerm1):  # the input1 here i
         # a list of lists that are just strings of the input; then we do if list[i].[input1] == searchterm and
         # abandon object approach, just makes things complicated ;
 
-        index1 = index1 + 1
+        i = i + 1
 
     print("Total apps matching your search: " + str(totalMatchingRows))
 
-
-def searchTwoTerms(columnInput1, columnInput2, searchList, searchedTerm1,
-                   searchedTerm2):  # the input1 here is the column to search
-    length = len(searchList)
-    index1 = 0
-    totalMatchingRows = 0
-    while index1 < length:  # go through the entire list; remember that users input will be 1 higher
-        checkApp = appList[i]
-        if searchedTerm1 in checkApp[columnInput1 - 1] and searchedTerm2 in checkApp[columnInput2 - 1]:
-            print(checkApp)
-            totalMatchingRows = totalMatchingRows + 1
-
-        index1 = index1 + 1
-
-    print("Total apps matching your search: " + str(totalMatchingRows))
-
-
-def searchThreeTerms(columnInput1, columnInput2, columnInput3, searchList, searchedTerm1, searchedTerm2,
-                     searchedTerm3):  # the input1 here is the column to search
-    length = len(searchList)
-    index1 = 0
-    totalMatchingRows = 0
-    while index1 < length:  # go through the entire list; remember that users input will be 1 higher
-        checkApp = appList[i]
-        if searchedTerm1 in checkApp[columnInput1 - 1] and searchedTerm2 in checkApp[columnInput2 - 1] and searchedTerm3 in \
-                checkApp[columnInput3 - 1]:
-            print(checkApp)
-            totalMatchingRows = totalMatchingRows + 1
-
-        index1 = index1 + 1
-
-    print("Total apps matching your search: " + str(totalMatchingRows))
-
-
-=======
-# No more needs to be done to load the source
-# Now just need to offer a menu with search options for user;
-# Different options depending on which column they want to search on
->>>>>>> parent of 8a95aa2... Scrap Object Approach
 # Requirements state user must be able to search by up to three values (Need to check up to 3 columns)
 # Ask user how many search values they will enter (up to three allowed)
-# Have a switch statement depending on which columns user would like to search by
-# Have the switch run in a loop with an exit command
 
 # First, prompt and ask user how many key values they will search for
 
@@ -150,25 +107,22 @@ print("Then, you will be prompted for your search term. Enter the term, followed
 exitCondition = False  # exit condition to terminate menu loop
 while not exitCondition:
     numberOfSearchTerms = int(input("Would you like to use 1, 2, or 3 search terms? Please type the number and press "
-                                    "enter. Enter 4 to exit the program."))
+                                    "enter. Enter 4 to exit the program. \n"))
     if numberOfSearchTerms == 1:
         # offer all columns and let user pick one to search on
         # then search the entire list at that columns index and return all that match
-<<<<<<< HEAD
         displayColumns()
         input1 = int(input("Which column above would you like to search on? \n"))
         searchTerm1 = input("What term do you wish to search for? \n")
-        print(input1)
-        print(searchTerm1)
         # searchOneTerm function
-        searchOneTerm(input1, appList, searchTerm1)
+        searchOneTerm(input1, appList2, searchTerm1)
     elif numberOfSearchTerms == 2:
         displayColumns()
         input1 = int(input("Select the first column you would like to search on: \n"))
         input2 = int(input("Select the second column you would like to search on: \n"))
         searchTerm1 = input("What is the first term you wish to search for? \n")
         searchTerm2 = input("What is the second term you wish to search for? \n")
-        searchTwoTerms(input1, input2, appList, searchTerm1, searchTerm2)
+        # searchTwoTerms(input1, input2)function
     elif numberOfSearchTerms == 3:
         displayColumns()
         input1 = int(input("Select the first column you would like to search on: \n"))
@@ -177,24 +131,6 @@ while not exitCondition:
         searchTerm1 = input("What is the first term you wish to search for? \n")
         searchTerm2 = input("What is the second term you wish to search for? \n")
         searchTerm3 = input("What is the third term you wish to search for? \n")
-        searchThreeTerms(input1, input2, input3, appList, searchTerm1, searchTerm2, searchTerm3)
-=======
-        # display columns function
-        input1 = input("Which column above would you like to search on?")
-        # searchOneTerm function
-    elif numberOfSearchTerms == 2:
-        # display columns function
-        input1 = input("Select the first column you would like to search on: ")
-        input2 = input("Select the second column you would like to search on: ")
-        # searchTwoTerms(input1, input2)function
-    elif numberOfSearchTerms == 3:
-        # display columns function
-        input1 = input("Select the first column you would like to search on: ")
-        input2 = input("Select the second column you would like to search on: ")
-        input3 = input("Select the third column you would like to search on: ")
         # searchThreeTerms(input1, input2, input3) function
->>>>>>> parent of 8a95aa2... Scrap Object Approach
     elif numberOfSearchTerms == 4:
         exitCondition = True
-
-
