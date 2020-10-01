@@ -4,50 +4,12 @@
 # Demonstrates the use of Lists is Python with 2018 Google Play Store Data
 # Data Source URL: https://www.kaggle.com/lava18/google-play-store-apps
 
-# Initial Ideas: create a list of objects where each entry in the list is an app object
-# Each app will have attributes that correspond to column titles
-# The user needs to be able to filter on up to three of these attributes
-# Need to confirm if user should be able to apply multiple filters (ex: category type and content rating)
 # User inputs their criteria and the program needs to find all records that match
-# Minimum Requirements: Be able to run the program once and return result, user may have to rerun for additional queries
-# Ideal Requirements: Be able to have program run in a loop and filter on multiple criteria
-# Shoot for the Stars Requirements: GUI with program logic
 
 import csv
 
-
-# Class to represent an app object and all its properties (columns) from the data source
-# Class approach was abandoned, it complicated processing unnecessarily
-
-class GoogleApp:
-    def __init__(self, app, category, rating, reviews, size, installs, type, price, contentRating, genres, lastUpdated,
-                 currentVer, androidVer):
-        self.app = app
-        self.category = category
-        self.rating = rating
-        self.reviews = reviews
-        self.size = size
-        self.installs = installs
-        self.type = type
-        self.price = price
-        self.contentRating = contentRating
-        self.genres = genres
-        self.lastUpdated = lastUpdated
-        self.currentVer = currentVer
-        self.androidVer = androidVer
-
-    # String Representation of Google App Object (How its displayed once its printed)
-    def __str__(self):
-        appString = self.app + " " + self.category + " " + self.rating + " " + self.reviews + " "
-        appString = appString + " " + self.size + " " + self.installs + " " + self.type + " "
-        appString = appString + " " + self.price + " " + self.contentRating + " " + self.genres + " "
-        appString = appString + " " + self.lastUpdated + " " + self.currentVer + " " + self.androidVer
-        return appString
-
-
 # Our list object which will hold the entire data source for processing
-appList = []  # this was abandoned, but it was cool to make an entire list of objects
-appList2 = []
+appList = []
 
 # Use a reader object to read from csv file data source
 with open('googleplaystore.csv') as csvFile:
@@ -56,12 +18,10 @@ with open('googleplaystore.csv') as csvFile:
     for row in readCSV:
         # Note: needed to edit data source as one row had two columns that were null and reader object threw errors
         # For each row in the file, make an object and append it to the list of items
-        appList.append(
-            GoogleApp(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11],
-                      row[12]))
         listFormOfApp = [row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10],
                          row[11], row[12]]
-        appList2.append(listFormOfApp)
+        print(listFormOfApp)
+        appList.append(listFormOfApp)
 
 
 # Display function that only serves to format menu selection
@@ -73,15 +33,15 @@ def displayColumns():
           "required, also only checks major version \n")
 
 
-def searchOneTerm(input1, searchList, searchTerm1):  # the input1 here is the column to search
+def searchOneTerm(columnInput1, searchList, searchedTerm1):  # the input1 here is the column to search
     length = len(searchList)
-    i = 0
+    index1 = 0
     totalMatchingRows = 0
-    while i < length:  # go through the entire list; remember that users input will be 1 higher
-        checkApp = appList2[i]
-        # print(checkApp[input1])
+    while index1 < length:  # go through the entire list; remember that users input will be 1 higher
+        checkApp = appList[i]
+        print(checkApp[input1])
         # print(type(checkApp[input1]))
-        if searchTerm1 in checkApp[input1 - 1]:
+        if searchedTerm1 in checkApp[columnInput1 - 1]:
             print(checkApp)
             totalMatchingRows = totalMatchingRows + 1
         # input 1 is the column, or row[input1] from when the objects were made but now they correspond to
@@ -89,9 +49,43 @@ def searchOneTerm(input1, searchList, searchTerm1):  # the input1 here is the co
         # a list of lists that are just strings of the input; then we do if list[i].[input1] == searchterm and
         # abandon object approach, just makes things complicated ;
 
-        i = i + 1
+        index1 = index1 + 1
 
     print("Total apps matching your search: " + str(totalMatchingRows))
+
+
+def searchTwoTerms(columnInput1, columnInput2, searchList, searchedTerm1,
+                   searchedTerm2):  # the input1 here is the column to search
+    length = len(searchList)
+    index1 = 0
+    totalMatchingRows = 0
+    while index1 < length:  # go through the entire list; remember that users input will be 1 higher
+        checkApp = appList[i]
+        if searchedTerm1 in checkApp[columnInput1 - 1] and searchedTerm2 in checkApp[columnInput2 - 1]:
+            print(checkApp)
+            totalMatchingRows = totalMatchingRows + 1
+
+        index1 = index1 + 1
+
+    print("Total apps matching your search: " + str(totalMatchingRows))
+
+
+def searchThreeTerms(columnInput1, columnInput2, columnInput3, searchList, searchedTerm1, searchedTerm2,
+                     searchedTerm3):  # the input1 here is the column to search
+    length = len(searchList)
+    index1 = 0
+    totalMatchingRows = 0
+    while index1 < length:  # go through the entire list; remember that users input will be 1 higher
+        checkApp = appList[i]
+        if searchedTerm1 in checkApp[columnInput1 - 1] and searchedTerm2 in checkApp[columnInput2 - 1] and searchedTerm3 in \
+                checkApp[columnInput3 - 1]:
+            print(checkApp)
+            totalMatchingRows = totalMatchingRows + 1
+
+        index1 = index1 + 1
+
+    print("Total apps matching your search: " + str(totalMatchingRows))
+
 
 # Requirements state user must be able to search by up to three values (Need to check up to 3 columns)
 # Ask user how many search values they will enter (up to three allowed)
@@ -114,15 +108,17 @@ while not exitCondition:
         displayColumns()
         input1 = int(input("Which column above would you like to search on? \n"))
         searchTerm1 = input("What term do you wish to search for? \n")
+        print(input1)
+        print(searchTerm1)
         # searchOneTerm function
-        searchOneTerm(input1, appList2, searchTerm1)
+        searchOneTerm(input1, appList, searchTerm1)
     elif numberOfSearchTerms == 2:
         displayColumns()
         input1 = int(input("Select the first column you would like to search on: \n"))
         input2 = int(input("Select the second column you would like to search on: \n"))
         searchTerm1 = input("What is the first term you wish to search for? \n")
         searchTerm2 = input("What is the second term you wish to search for? \n")
-        # searchTwoTerms(input1, input2)function
+        searchTwoTerms(input1, input2, appList, searchTerm1, searchTerm2)
     elif numberOfSearchTerms == 3:
         displayColumns()
         input1 = int(input("Select the first column you would like to search on: \n"))
@@ -131,6 +127,6 @@ while not exitCondition:
         searchTerm1 = input("What is the first term you wish to search for? \n")
         searchTerm2 = input("What is the second term you wish to search for? \n")
         searchTerm3 = input("What is the third term you wish to search for? \n")
-        # searchThreeTerms(input1, input2, input3) function
+        searchThreeTerms(input1, input2, input3, appList, searchTerm1, searchTerm2, searchTerm3)
     elif numberOfSearchTerms == 4:
         exitCondition = True
