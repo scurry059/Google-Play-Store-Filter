@@ -70,33 +70,28 @@ def displayColumns():
           "required (also must be exact version #) \n")
 
 
+# Function definition that searches for just one term in one column
 def searchOneTerm(columnInput1, searchList, searchedTerm1):  # the input1 here is the column to search
-    length = len(searchList)
-    rowIndex = 0
-    totalMatchingRows = 0
+    length = len(searchList)  # total list length
+    rowIndex = 0  # start at the beginning of the list
+    totalMatchingRows = 0  # count variable for matching rows to return to the user
     while rowIndex < length:  # go through the entire list; remember that users input will be 1 higher
         checkApp = appList2[rowIndex]
-        # print(checkApp[input1])
-        # print(type(checkApp[input1]))
-        if searchedTerm1 in checkApp[columnInput1 - 1]:
-            print(checkApp)
+        if searchedTerm1 in checkApp[columnInput1 - 1]:  # remember to account for lists starting at index 0
+            print(checkApp)  # string representation of the app
             totalMatchingRows = totalMatchingRows + 1
-        # input 1 is the column, or row[input1] from when the objects were made but now they correspond to
-        # variables... input1 could still be the column, we could have the data arranged as a multi dimensional list?
-        # a list of lists that are just strings of the input; then we do if list[i].[input1] == searchterm and
-        # abandon object approach, just makes things complicated ;
 
-        rowIndex = rowIndex + 1
+        rowIndex = rowIndex + 1  # check the next row for matches
 
-    print("Total apps matching your search: " + str(totalMatchingRows))
+    print("Total apps matching your search: " + str(totalMatchingRows))  # return total to console
 
 
-# Search for two conditions to be true
+# Search for two term conditions to be true
 def searchTwoTerms(columnInput1, columnInput2, searchList, searchedTerm1, searchedTerm2):
     length = len(searchList)
     rowIndex = 0
     totalMatchingRows = 0
-    while rowIndex < length:  # go through the entire list; remember that users input will be 1 higher
+    while rowIndex < length:
         checkApp = appList2[rowIndex]
         if searchedTerm1 in checkApp[columnInput1 - 1] and searchedTerm2 in checkApp[columnInput2 - 1]:
             print(checkApp)
@@ -107,12 +102,12 @@ def searchTwoTerms(columnInput1, columnInput2, searchList, searchedTerm1, search
     print("Total apps matching your search: " + str(totalMatchingRows))
 
 
-# Search for two conditions to be true
+# Search for three conditions to be true
 def searchThreeTerms(columnInput1, columnInput2, columnInput3, searchList, searchedTerm1, searchedTerm2, searchedTerm3):
     length = len(searchList)
     rowIndex = 0
     totalMatchingRows = 0
-    while rowIndex < length:  # go through the entire list; remember that users input will be 1 higher
+    while rowIndex < length:
         checkApp = appList2[rowIndex]
         if searchedTerm1 in checkApp[columnInput1 - 1] and searchedTerm2 in checkApp[columnInput2 - 1] and searchedTerm3 in checkApp[columnInput3 - 1]:
             print(checkApp)
