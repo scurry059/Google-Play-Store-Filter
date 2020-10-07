@@ -15,4 +15,53 @@ Minimum Requirements: Be able to run the program once and return result, user ma
 Ideal Requirements: Be able to have program run in a loop and filter on multiple criteria
 Shoot for the Stars Requirements: GUI with program logic
 
- */
+// Reads CSV File
+package Comp228;
+
+import java.io.*;
+import java.util.Scanner;
+public class Info {
+    public static void main(String[] args) throws Exception  
+    {  
+    //parsing a CSV file into Scanner class constructor  
+        Scanner sc = new Scanner(new File("C:/Users/drywi/csv/googleplaystore.csv"));  
+        sc.useDelimiter(",");   //sets the delimiter pattern  
+            while (sc.hasNext())  //returns a boolean value  
+    {  
+        System.out.print(sc.next());  //find and returns the next complete token from this scanner  
+    }   
+            sc.close();  //closes the scanner  
+        }  
+    }  
+
+
+// Representing Each Object
+package Comp228;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Objects {
+    public static void main(String[] args) {
+        List<String> object = new ArrayList<>();
+        object.add("app");
+        object.add("category");
+        object.add("rating");
+        object.add("reviews");
+        object.add("size");
+        object.add("installs");
+        object.add("type");
+        object.add("price");
+        object.add("contentRating");
+        object.add("genres");
+        object.add("lastUpdated");
+        object.add("currentVer");
+        object.add("androidVer");
+        for (String objects : object) {
+            
+            System.out.printf("%s ", object);
+        }
+        
+        System.out.println();
+    }
+}
+
